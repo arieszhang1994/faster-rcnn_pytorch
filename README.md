@@ -162,8 +162,8 @@ The demo is stopped by clicking the image window and then pressing the 'q' key.
 This project is equally contributed by [Jianwei Yang](https://github.com/jwyang) and [Jiasen Lu](https://github.com/jiasenlu), and many others (thanks to them!).
 
 ## Citation
-    @article{jjfaster2rcnn,
-        Author = {Jianwei Yang and Jiasen Lu and Dhruv Batra and Devi Parikh},
+    @article{ariesfaster2rcnn,
+        Author = {Aries Zhang},
         Title = {A Pytorch Implementation of Faster R-CNN with 4-step training},
         Journal = {https://github.com/Arieszhang1994/faster-rcnn_pytorch.git},
         Year = {2018}
