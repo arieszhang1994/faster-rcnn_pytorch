@@ -55,7 +55,7 @@ class _RPN(nn.Module):
         )
         return x
 
-    def forward(self, base_feat, im_info, gt_boxes, num_boxes):
+    def forward(self, base_feat, im_info, gt_boxes, num_boxes, alt=False):
 
         batch_size = base_feat.size(0)
 
@@ -72,7 +72,10 @@ class _RPN(nn.Module):
         rpn_bbox_pred = self.RPN_bbox_pred(rpn_conv1)
 
         # proposal layer
-        cfg_key = 'TRAIN' if self.training else 'TEST'
+        if not alt:
+            cfg_key = 'TRAIN' if self.training else 'TEST'
+        else:
+            cfg_key = 'TEST'
 
         rois = self.RPN_proposal((rpn_cls_prob.data, rpn_bbox_pred.data,
                                  im_info, cfg_key))
@@ -81,7 +84,7 @@ class _RPN(nn.Module):
         self.rpn_loss_box = 0
 
         # generating training labels and build the rpn loss
-        if self.training:
+        if self.training and (alt == False):
             assert gt_boxes is not None
 
             rpn_data = self.RPN_anchor_target((rpn_cls_score.data, gt_boxes, im_info, num_boxes))
