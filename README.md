@@ -157,9 +157,18 @@ python demo.py --net vgg16 \
 ```
 The demo is stopped by clicking the image window and then pressing the 'q' key.
 
+## For understanding Faster rcnn.
+For me, the most difficult part to understand is The ProposalLayer
+
+Below is the pic for the details of ProposalLayer. Although some declare of the variable is a little different from this code, it really helps a lot for understanding the detail of the whole
+model
+<div style="color:#0000FF" align="center">
+<img src="materials4learning/Faster_RCNN.png" width="430/> 
+</div>
+
 ## Authorship
 
-This project is equally contributed by [Jianwei Yang](https://github.com/jwyang) and [Jiasen Lu](https://github.com/jiasenlu), and many others (thanks to them!).
+This project is contributed by [Aries Zhang](https://github.com/Arieszhang1994) and many others.
 
 ## Citation
     @article{ariesfaster2rcnn,
