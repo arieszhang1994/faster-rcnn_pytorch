@@ -1,4 +1,4 @@
-# A *Faster* Pytorch Implementation of Faster R-CNN
+# A Pytorch Implementation of Faster R-CNN
 
 ## Introduction
 This project is a pytorch implementation of faster R-CNN froked from *[wyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
@@ -163,7 +163,7 @@ For me, the most difficult part to understand is The ProposalLayer
 Below is the pic for the details of ProposalLayer. Although some declare of the variable is a little different from this code, it really helps a lot for understanding the detail of the whole
 model
 <div style="color:#0000FF" align="center">
-<img src="materials4learning/Faster_RCNN.png" width="430/> 
+<img src="materials4learning/Faster_RCNN.png" width="430"/> 
 </div>
 
 ## Authorship
