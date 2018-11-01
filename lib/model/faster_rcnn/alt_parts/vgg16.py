@@ -80,7 +80,7 @@ class vgg16_step1(nn.Module):
         return rois, rpn_loss_cls, rpn_loss_bbox
 
 class vgg16_step2(nn.Module):
-    '''step1 for vgg16'''
+    '''step2 for vgg16'''
     def __init__(self, classes,class_agnostic, pretrained, step1_model_path, base_model='vgg16'):
         super(vgg16_step2, self).__init__()
         self.model_path = 'data/pretrained_model/vgg16_caffe.pth'
@@ -152,7 +152,7 @@ class vgg16_step2(nn.Module):
         return rois, cls_prob, bbox_pred, rpn_loss_cls, rpn_loss_bbox, RCNN_loss_cls, RCNN_loss_bbox, rois_label
 
 class vgg16_step3(nn.Module):
-    '''step1 for vgg16'''
+    '''step3 for vgg16'''
     def __init__(self, classes,class_agnostic,pretrained, step2_model_path, base_model='vgg16'):
         super(vgg16_step3, self).__init__()
         self.model_path = step2_model_path
@@ -195,7 +195,7 @@ class vgg16_step3(nn.Module):
         return rois, rpn_loss_cls, rpn_loss_bbox
 
 class vgg16_step4(nn.Module):
-    '''step1 for vgg16'''
+    '''step4 for vgg16'''
     def __init__(self, classes,class_agnostic, pretrained, step2_model_path, step3_model_path, base_model='vgg16'):
         super(vgg16_step4, self).__init__()
         self.step2_model_path = step2_model_path
