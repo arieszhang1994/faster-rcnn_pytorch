@@ -67,7 +67,7 @@ class _detector(nn.Module):
                 self.model_path = 'data/pretrained_model/resnet152_caffe.pth'
                 resnet = resnet152()
             if self.pretrained:
-                print("Loading pretrained weights from %s" %(self.model_path))
+                print("Detector: Loading pretrained weights from %s" %(self.model_path))
                 state_dict = torch.load(self.model_path)
                 resnet.load_state_dict({k:v for k,v in state_dict.items() if k in resnet.state_dict()})
             self.RCNN_top = nn.Sequential(resnet.layer4)
