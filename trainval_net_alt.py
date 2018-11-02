@@ -32,7 +32,7 @@ from model.utils.net_utils import weights_normal_init, save_net, load_net, \
       adjust_learning_rate, save_checkpoint, clip_gradient
 
 from model.faster_rcnn.alt_parts.vgg16 import vgg16_step1, vgg16_step2, vgg16_step3, vgg16_step4
-from model.faster_rcnn.resnet import resnet
+from model.faster_rcnn.alt_parts.resnet import resnet_step1, resnet_step2, resnet_step3, resnet_step4 
 
 def parse_args():
   """
@@ -279,13 +279,13 @@ if __name__ == '__main__':
     #---------------------------------------------------
     # initilize the network here.
     if args.net == 'vgg16':
-      fasterRCNN_step1 = vgg16_step1(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step1 = vgg16_step1(imdb.classes, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res101':
-      fasterRCNN = resnet(imdb.classes, 101, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step1 = resnet_step1(imdb.classes, num_layers=101, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res50':
-      fasterRCNN = resnet(imdb.classes, 50, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step1 = resnet_step1(imdb.classes, num_layers=50, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res152':
-      fasterRCNN = resnet(imdb.classes, 152, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step1 = resnet_step1(imdb.classes, num_layers=152, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     else:
       print("network is not defined")
       pdb.set_trace()
@@ -394,13 +394,17 @@ if __name__ == '__main__':
     #---------------------------------------------------
     # initilize the network here.
     if args.net == 'vgg16':
-      fasterRCNN_step2 = vgg16_step2(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic,step1_model_path=os.path.join(output_dir,'faster_rcnn_1_step1_1_10021.pth'))
+      fasterRCNN_step2 = vgg16_step2(imdb.classes, step1_model_path=os.path.join(output_dir,'faster_rcnn_1_step1_20_5010.pth'), \
+                  fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res101':
-      fasterRCNN = resnet(imdb.classes, 101, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step2 = resnet_step2(imdb.classes, step1_model_path=os.path.join(output_dir,'faster_rcnn_1_step1_20_5010.pth'), \
+                  num_layers=101, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res50':
-      fasterRCNN = resnet(imdb.classes, 50, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step2 = resnet_step2(imdb.classes, step1_model_path=os.path.join(output_dir,'faster_rcnn_1_step1_20_5010.pth'), \
+                  num_layers=50, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res152':
-      fasterRCNN = resnet(imdb.classes, 152, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step2 = resnet_step2(imdb.classes, step1_model_path=os.path.join(output_dir,'faster_rcnn_1_step1_20_5010.pth'), \
+                  num_layers=152, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     else:
       print("network is not defined")
       pdb.set_trace()
@@ -514,13 +518,17 @@ if __name__ == '__main__':
     # step 3: train the RPN for the region proposal task 
     #---------------------------------------------------
     if args.net == 'vgg16':
-      fasterRCNN_step3 = vgg16_step3(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic,step2_model_path=os.path.join(output_dir, 'faster_rcnn_1_step2_1_10021.pth'))
+      fasterRCNN_step3 = vgg16_step3(imdb.classes, step2_model_path=os.path.join(output_dir, 'faster_rcnn_1_step2_20_5010.pth'), \
+                  fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res101':
-      fasterRCNN = resnet(imdb.classes, 101, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step3 = resnet_step3(imdb.classes, step2_model_path=os.path.join(output_dir, 'faster_rcnn_1_step2_20_5010.pth'), \
+                  num_layers=101, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res50':
-      fasterRCNN = resnet(imdb.classes, 50, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step3 = resnet_step3(imdb.classes, step2_model_path=os.path.join(output_dir, 'faster_rcnn_1_step2_20_5010.pth'), \
+                  num_layers=50, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res152':
-      fasterRCNN = resnet(imdb.classes, 152, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step3 = resnet_step3(imdb.classes, step2_model_path=os.path.join(output_dir, 'faster_rcnn_1_step2_20_5010.pth'), \
+                  num_layers=152, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     else:
       print("network is not defined")
       pdb.set_trace()
@@ -629,15 +637,21 @@ if __name__ == '__main__':
     #---------------------------------------------------
     # initilize the network here.
     if args.net == 'vgg16':
-      fasterRCNN_step4 = vgg16_step4(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic, \
-                      step2_model_path=os.path.join(output_dir,'faster_rcnn_1_step2_1_10021.pth'), \
-                      step3_model_path=os.path.join(output_dir,'faster_rcnn_1_step3_1_10021.pth') )
+      fasterRCNN_step4 = vgg16_step4(imdb.classes, step2_model_path=os.path.join(output_dir,'faster_rcnn_1_step2_20_5010.pth'), \
+                      step3_model_path=os.path.join(output_dir,'faster_rcnn_1_step3_20_5010.pth'), \
+                      fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res101':
-      fasterRCNN = resnet(imdb.classes, 101, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step4 = resnet_step4(imdb.classes, step2_model_path=os.path.join(output_dir,'faster_rcnn_1_step2_20_5010.pth'), \
+                      step3_model_path=os.path.join(output_dir,'faster_rcnn_1_step3_20_5010.pth'), \
+                      num_layers=101, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res50':
-      fasterRCNN = resnet(imdb.classes, 50, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step4 = resnet_step4(imdb.classes, step2_model_path=os.path.join(output_dir,'faster_rcnn_1_step2_20_5010.pth'), \
+                      step3_model_path=os.path.join(output_dir,'faster_rcnn_1_step3_20_5010.pth'), \
+                      num_layers=50, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     elif args.net == 'res152':
-      fasterRCNN = resnet(imdb.classes, 152, pretrained=True, class_agnostic=args.class_agnostic)
+      fasterRCNN_step4 = resnet_step4(imdb.classes, step2_model_path=os.path.join(output_dir,'faster_rcnn_1_step2_20_5010.pth'), \
+                      step3_model_path=os.path.join(output_dir,'faster_rcnn_1_step3_20_5010.pth'), \
+                      num_layers=152, fix_cnn_base=True, pretrained=True, class_agnostic=args.class_agnostic)
     else:
       print("network is not defined")
       pdb.set_trace()
