@@ -40,6 +40,8 @@ class resnet_step1(nn.Module):
         self.class_agnostic = class_agnostic
         self.num_layer = num_layers
         self.fix_cnn_base = fix_cnn_base
+        self.classes = classes
+        self.n_classes = len(classes)
 
         # loss
         self.RCNN_loss_cls = 0
@@ -147,7 +149,9 @@ class resnet_step2(nn.Module):
         self.class_agnostic = class_agnostic
         self.num_layer = num_layers
         self.fix_cnn_base = fix_cnn_base
-        self.base_model = 'resnet'+str(num_layer)
+        self.classes = classes
+        self.n_classes = len(classes)
+        self.base_model = 'resnet'+str(self.num_layer)
         # loss
         self.RCNN_loss_cls = 0
         self.RCNN_loss_bbox = 0
@@ -265,7 +269,9 @@ class resnet_step3(nn.Module):
         self.class_agnostic = class_agnostic
         self.num_layer = num_layers
         self.fix_cnn_base = fix_cnn_base
-        self.base_model = 'resnet'+str(num_layer)
+        self.classes = classes
+        self.n_classes = len(classes)
+        self.base_model = 'resnet'+str(self.num_layer)
 
         # loss
         self.RCNN_loss_cls = 0
@@ -337,7 +343,9 @@ class resnet_step4(nn.Module):
         self.class_agnostic = class_agnostic
         self.num_layer = num_layers
         self.fix_cnn_base = fix_cnn_base
-        self.base_model = 'resnet'+str(num_layer)
+        self.classes = classes
+        self.n_classes = len(classes)
+        self.base_model = 'resnet'+str(self.num_layer)
 
         # loss
         self.RCNN_loss_cls = 0
