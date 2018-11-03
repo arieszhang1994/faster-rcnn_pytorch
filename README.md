@@ -4,8 +4,8 @@
 This project is a pytorch implementation of faster R-CNN froked from *[wyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
 
 ### What I am doing and going to do
+- [*] 4-step alternating training(based on the paper and kind instruction from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0)
 - [ ] Support pytorch-0.4.1 or higher.
-- [ ] 4-step alternating training
 
 ## Other Implementations
 
@@ -133,6 +133,22 @@ python test_net.py --dataset pascal_voc --net vgg16 \
 ```
 Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, EPOCH=6, CHECKPOINT=416.
 
+## Test result
+Mean AP for one step training from [wyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
+```
+python3 trainval_net.py --dataset pascal_voc --net res101 --nw 8 --bs 2 --epochs 20 --cuda
+```
+is 0.7478
+
+Mean AP for 4 step training 
+```
+python3 trainval_net_alt.py --dataset pascal_voc --net res101 --nw 8 --bs 2 --epochs 20 20 20 20 --cuda
+```
+is 0.7245
+
+I didn't fine tune the model right now and just choose the 20th epoch from each step.
+Maybe the performance will be better if you select the "best" model in each step.
+
 ## Demo
 
 If you want to run detection on your own images with a pre-trained model, download the pretrained model listed in above tables or train your own models at first, then add images to folder $ROOT/images, and then run
@@ -163,7 +179,12 @@ For me, the most difficult part to understand is The ProposalLayer.
 Below is the pic for the details of ProposalLayer. Although some declare of the variable is a little different from this code, it really helps a lot for understanding the detail of the whole
 model.
 <div style="color:#0000FF" align="center">
-<img src="materials4learning/Faster_RCNN.png" width="430"/> 
+<img src="materials4learning/Faster_RCNN.png" width="500"/> 
+</div>
+
+Here is the screen shot of the video from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0
+<div style="color:#0000FF" align="center">
+<img src="materials4learning/training_phase_sum.png" width="500"/> 
 </div>
 
 ## Authorship
