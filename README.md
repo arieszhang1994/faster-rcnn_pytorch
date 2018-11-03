@@ -4,7 +4,7 @@
 This project is a pytorch implementation of faster R-CNN froked from *[wyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
 
 ### What I am doing and going to do
-- [*] 4-step alternating training(based on the paper and kind instruction from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0)
+- [x] 4-step alternating training(based on the paper and kind instruction from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0)
 - [ ] Support pytorch-0.4.1 or higher.
 
 ## Other Implementations
