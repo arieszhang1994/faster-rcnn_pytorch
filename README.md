@@ -184,7 +184,7 @@ model.
 
 Here is the screen shot of the video from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0
 <div style="color:#0000FF" align="center">
-<img src="materials4learning/training_phase_sum.png" width="500"/> 
+<img src="materials4learning/training_phase_sum.png" width="800"/> 
 </div>
 
 ## Authorship
