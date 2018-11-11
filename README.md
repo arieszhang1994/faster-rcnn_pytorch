@@ -7,10 +7,6 @@ This project is a pytorch implementation of faster R-CNN froked from *[wyang/fas
 - [x] 4-step alternating training(based on the paper and kind instruction from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0)
 - [x] Flow of Tensor which is just same as my code.
 - [ ] Support pytorch-0.4.1 or higher.
-<<<<<<< HEAD
-- [ ] Flow of Tensor which is just same as my code.
-=======
->>>>>>> 718f7c042cea36665dcdd360a009171d77938f10
 - [ ] RFCN.
 - [ ] CoupleNet.
 
