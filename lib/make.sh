@@ -19,6 +19,13 @@ CUDA_ARCH="-gencode arch=compute_30,code=sm_30 \
            -gencode arch=compute_60,code=sm_60 \
            -gencode arch=compute_61,code=sm_61 "
 
+# clean build file
+rm model/nms/src/*.o
+rm model/roi_pooling/src/*.o
+rm model/roi_align/src/*.o
+rm model/roi_crop/src/*.o
+rm model/psroi_pooling/src/cuda/*.o
+
 # compile NMS
 cd model/nms/src
 echo "Compiling nms kernels by nvcc..."
@@ -53,4 +60,13 @@ echo "Compiling roi crop kernels by nvcc..."
 nvcc -c -o roi_crop_cuda_kernel.cu.o roi_crop_cuda_kernel.cu \
 	 -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC $CUDA_ARCH
 cd ../
+python3 build.py
+
+# compile roi_crop
+cd ../../
+cd model/psroi_pooling/src/cuda
+echo "Compiling psroi pooling kernels by nvcc..."
+nvcc -c -o psroi_pooling.cu.o psroi_pooling_kernel.cu \
+	 -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC $CUDA_ARCH
+cd ../../
 python3 build.py
