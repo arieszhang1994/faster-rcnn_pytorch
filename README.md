@@ -5,8 +5,12 @@ This project is a pytorch implementation of faster R-CNN froked from *[wyang/fas
 
 ### What I am doing and going to do
 - [x] 4-step alternating training(based on the paper and kind instruction from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0)
+- [x] Flow of Tensor which is just same as my code.
 - [ ] Support pytorch-0.4.1 or higher.
+<<<<<<< HEAD
 - [ ] Flow of Tensor which is just same as my code.
+=======
+>>>>>>> 718f7c042cea36665dcdd360a009171d77938f10
 - [ ] RFCN.
 - [ ] CoupleNet.
 
@@ -177,12 +181,12 @@ python demo.py --net vgg16 \
 The demo is stopped by clicking the image window and then pressing the 'q' key.
 
 ## For understanding Faster rcnn
-For me, the most difficult part to understand is The ProposalLayer.
+I have view the whole code again to draw a flow chart of Tensor.
+If you want to understand how the code runs fully, I recommend you watch this flow chart and the code at the same time,
+which may help you to understand.
 
-Below is the pic for the details of ProposalLayer. Although some declare of the variable is a little different from this code, it really helps a lot for understanding the detail of the whole
-model.
 <div style="color:#0000FF" align="center">
-<img src="materials4learning/Faster_RCNN.png" width="500"/> 
+<img src="materials4learning/Faster_RCNN.png" width="1000"/> 
 </div>
 
 Here is the screen shot of the video from https://www.youtube.com/watch?v=cSO1nUj495Y&index=5&list=PLkRkKTC6HZMzp28TxR_fJYZ-K8Yu3EQw0
