@@ -2,7 +2,7 @@ import torch.nn.functional as F
 import torch
 from model.utils.net_utils import _smooth_l1_loss
 
-def detect_loss(self, cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
+def detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
     # classification loss
     RCNN_loss_cls = F.cross_entropy(cls_score, rois_label)
 
@@ -11,7 +11,7 @@ def detect_loss(self, cls_score, rois_label, bbox_pred, rois_target, rois_inside
 
     return RCNN_loss_cls, RCNN_loss_bbox
 
-def ohem_detect_loss(self, cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
+def ohem_detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
 
     def log_sum_exp(x):
         x_max = x.data.max()
