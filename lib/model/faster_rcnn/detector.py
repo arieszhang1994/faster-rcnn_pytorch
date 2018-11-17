@@ -21,6 +21,7 @@ from model.rpn.proposal_target_layer_cascade import _ProposalTargetLayer
 import time
 import pdb
 from model.utils.net_utils import _smooth_l1_loss, _crop_pool_layer, _affine_grid_gen, _affine_theta
+from model.utils.loss import detect_loss, ohem_detect_loss
 
 class _detector(nn.Module):
     '''detecotor'''
@@ -148,11 +149,8 @@ class _detector(nn.Module):
         RCNN_loss_bbox = 0
 
         if self.training:
-            # classification loss
-            RCNN_loss_cls = F.cross_entropy(cls_score, rois_label)
-
-            # bounding box regression L1 loss
-            RCNN_loss_bbox = _smooth_l1_loss(bbox_pred, rois_target, rois_inside_ws, rois_outside_ws)
+            loss_func = self.ohem_detect_loss if cfg.TRAIN.OHEM else self.detect_loss
+            RCNN_loss_cls, RCNN_loss_bbox = loss_func(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws)
 
 
         cls_prob = cls_prob.view(batch_size, rois.size(1), -1)
