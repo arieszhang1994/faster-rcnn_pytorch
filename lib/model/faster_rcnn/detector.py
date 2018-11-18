@@ -150,7 +150,7 @@ class _detector(nn.Module):
 
         if self.training:
             loss_func = self.ohem_detect_loss if cfg.TRAIN.OHEM else self.detect_loss
-            RCNN_loss_cls, RCNN_loss_bbox = loss_func(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws)
+            RCNN_loss_cls, RCNN_loss_bbox = loss_func(batch_size,cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws)
 
 
         cls_prob = cls_prob.view(batch_size, rois.size(1), -1)

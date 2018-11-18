@@ -3,7 +3,7 @@ import torch
 from model.utils.net_utils import _smooth_l1_loss
 from model.utils.config import cfg
 
-def detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
+def detect_loss(batch_size,cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
     # classification loss
     RCNN_loss_cls = F.cross_entropy(cls_score, rois_label)
 
@@ -12,13 +12,13 @@ def detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, r
 
     return RCNN_loss_cls, RCNN_loss_bbox
 
-def ohem_detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
+def ohem_detect_loss(batch_size,cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
 
     def log_sum_exp(x):
         x_max = x.data.max()
         return torch.log(torch.sum(torch.exp(x - x_max), dim=1, keepdim=True)) + x_max
 
-    num_hard = cfg.TRAIN.BATCH_SIZE * self.batch_size
+    num_hard = cfg.TRAIN.BATCH_SIZE * batch_size
     pos_idx = rois_label > 0
     num_pos = pos_idx.int().sum()
 
