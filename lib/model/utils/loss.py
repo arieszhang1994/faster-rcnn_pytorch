@@ -1,6 +1,7 @@
 import torch.nn.functional as F
 import torch
 from model.utils.net_utils import _smooth_l1_loss
+from model.utils.config import cfg
 
 def detect_loss(cls_score, rois_label, bbox_pred, rois_target, rois_inside_ws, rois_outside_ws):
     # classification loss
