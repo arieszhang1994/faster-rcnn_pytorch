@@ -25,7 +25,7 @@ def ohem_detect_loss(batch_size,cls_score, rois_label, bbox_pred, rois_target, r
     # classification loss
     num_classes = cls_score.size(1)
     weight = cls_score.data.new(num_classes).fill_(1.)
-    weight[0] = num_pos.data[0] / num_hard
+    weight[0] = num_pos.data.item() / num_hard
 
     conf_p = cls_score.detach()
     conf_t = rois_label.detach()
@@ -40,6 +40,9 @@ def ohem_detect_loss(batch_size,cls_score, rois_label, bbox_pred, rois_target, r
     pos_idx = pos_idx.unsqueeze(1).expand_as(bbox_pred)
     loc_p = bbox_pred[pos_idx].view(-1, 4)
     loc_t = rois_target[pos_idx].view(-1, 4)
-    loss_box = F.smooth_l1_loss(loc_p, loc_t)
+    loc_inside_ws = rois_inside_ws[pos_idx].view(-1, 4)
+    loc_outside_ws = rois_outside_ws[pos_idx].view(-1, 4)
+    #loss_box = F.smooth_l1_loss(loc_p, loc_t)
+    loss_box = _smooth_l1_loss(loc_p, loc_t, loc_inside_ws, loc_outside_ws)
 
     return loss_cls, loss_box
