@@ -44,7 +44,7 @@ class _ProposalTargetLayer(nn.Module):
 
         num_images = 1
         # need test maybe cfg.TEST.RPN_POST_NMS_TOP_N ?
-        rois_per_image =  cfg.TEST.RPN_POST_NMS_TOP_N if cfg.TRAIN.OHEM else int(cfg.TRAIN.BATCH_SIZE / num_images)
+        rois_per_image =  cfg.TRAIN.RPN_POST_NMS_TOP_N if cfg.TRAIN.OHEM else int(cfg.TRAIN.BATCH_SIZE / num_images)
         fg_rois_per_image = int(np.round(cfg.TRAIN.FG_FRACTION * rois_per_image))
         fg_rois_per_image = 1 if fg_rois_per_image == 0 else fg_rois_per_image
 

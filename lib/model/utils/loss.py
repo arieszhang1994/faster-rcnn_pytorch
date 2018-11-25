@@ -35,6 +35,7 @@ def ohem_detect_loss(batch_size,cls_score, rois_label, bbox_pred, rois_target, r
     loss_c[pos_idx] = 100. # include all positive samples
     _, topk_idx = torch.topk(loss_c.view(-1), num_hard)
     loss_cls = F.cross_entropy(cls_score[topk_idx], rois_label[topk_idx], weight=weight)
+    #loss_cls = F.cross_entropy(cls_score[topk_idx], rois_label[topk_idx])
 
     # bounding box regression L1 loss
     pos_idx = pos_idx.unsqueeze(1).expand_as(bbox_pred)
