@@ -20,7 +20,7 @@ from datasets.vg import vg
 import numpy as np
 
 # Set up pascal_custom__<split>
-for split in ['train', 'val']:
+for split in ['train', 'test']:
   name = 'pascal_custom_{}'.format(split)
   __sets[name] = (lambda split=split: pascal_custom(split))
 
