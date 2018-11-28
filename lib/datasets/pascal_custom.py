@@ -41,7 +41,7 @@ except NameError:
 class pascal_custom(imdb):
     def __init__(self, image_set, devkit_path=None):
         imdb.__init__(self, 'pascal_custom_'+ image_set)
-        self._year = 2018
+        self._year = 2007
         self._image_set = image_set
         self._devkit_path = self._get_default_path()
         self._data_path = os.path.join(self._devkit_path, 'pascal_custom')
